@@ -18,72 +18,44 @@ if [ "$yes_no" != "Y" ]; then
 else
     f_printLn "You might be asked for your password to run admin commands ..."
 
-    # Getting lsb-release to have information on distro
-    # To-Do find another way to know which distro before installing 
-    #sudo apt-get update && sudo apt-get install lsb-core -y
-
-    source /etc/lsb-release
-    RELEASE=$DISTRIB_RELEASE
-    CODENAME=$DISTRIB_CODENAME
-
     now=`date +%F`
     last_apt_update="$(date -d "1970-01-01 + $(stat -c '%Z' /var/lib/apt/periodic/update-success-stamp ) secs" '+%F')"
 
     days_since_last_apt_update=$(f_dateDiff $now $last_apt_update)
+    # ToDo re-check result after clean install
     if (( $(echo "$days_since_last_apt_update > 1" | bc -l) )); then
         sudo apt-get update    
     fi
+
+    # Getting lsb-release to have information on distro
+    # ToDo find another way to know which distro before installing 
     
-    sudo apt-get install git xclip -y
-        
-    gitUserName=`git config --get user.name`
-    gitUserEmail=`git config --get user.email`
+    sudo apt-get install lsb-core git xclip -y
 
-    readGitUserName() {
-        gitUserName=`f_readP "What's your name ? [This will be use as your git user name] :"`
+    source /etc/lsb-release
+    RELEASE=$DISTRIB_RELEASE
+    CODENAME=$DISTRIB_CODENAME    
 
-        # ToDo - Improve validation for white spaces and invalid char
-        while [ "$gitUserName" = "" ]; do read gitUserName; done
-    }
+    repo_added=0
 
-    if [ "$gitUserName" != "" ]; then
-        f_readYesNo "Your git user.name is already set to $gitUserName. Would you like to change it ? (y/N)"
-        if [ "$yes_no" = "Y" ]; then
-            readGitUserName
-        fi
-    else
-        readGitUserName
+    if ! f_apt_repository_installed "universe"; then
+        sudo apt-add-repository universe
+        repo_added=1
+    fi
+    if ! f_apt_repository_installed "refind"; then
+        sudo apt-add-repository ppa:rodsmith/refind
+        repo_added=1
     fi
 
-    readGitUserEmail() {
-        gitUserEmail=`f_readP "What's your e-mail ? [This will be use as your git user email] :"`
-
-        # ToDo - Improve validation for white spaces and invalid char
-        while [ "$gitUserEmail" = "" ]; do read gitUserEmail; done
-    }
-
-    if [ "$gitUserEmail" != "" ]; then
-        f_readYesNo "Your git user.email is already set to $gitUserEmail. Would you like to change it ? (y/N)"
-        if [ "$yes_no" = "Y" ]; then
-            readGitUserEmail
-        fi
-    else
-        readGitUserEmail
+    if [ repo_added=1 ]; then
+        sudo apt-get update
     fi
+    
+    sudo apt-get install apt-transport-https dirmngr -y
 
-    # git
-    git config --global user.email "$gitUserEmail"
-    git config --global user.name "$gitUserName"
+    f_readYesNo "Would you like to setup git ? (y/N) :"
 
-    f_readYesNo "Would you like to connect to your GitHub account with an SSH key ? (y/N)"
     if [ "$yes_no" = "Y" ]; then
-        
-        source connect-github-ssh.sh $gitUserEmail
-        
-        f_readYesNo "If you cloned this repo using https, now that you have SSH enabled, would you like to change this repo authentication to ssh ? (y/N)"
-        if [ "$yes_no" = "Y" ]; then
-            git remote set-url origin git@github.com:frohlichcortezh/ubuntu-based-scripts.git            
-        fi
-
+        source setup-git.sh        
     fi
 fi

@@ -26,3 +26,23 @@ f_readYesNo() {
 f_dateDiff() {
     echo "( `date -d "$1" +%s` - `date -d "$2" +%s`) / (24*3600)" | bc -l
 }
+
+f_apt_package_is_installed() {
+    package_info=`dpkg -s $1`
+
+    if [ "$package_info" = *"not installed"* ]; then
+        false
+    else
+        true
+    fi
+}
+
+f_apt_repository_installed() {
+    repository_list=`egrep -v '^#|^ *$' /etc/apt/sources.list /etc/apt/sources.list.d/*`
+
+    if [ "$package_info" = *"$1"* ]; then
+        false
+    else
+        true
+    fi
+}
