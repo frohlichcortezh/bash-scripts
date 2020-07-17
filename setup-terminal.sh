@@ -7,9 +7,7 @@ source functions.sh
     fi
 
     # Install powerline-shell -> https://github.com/b-ryan/powerline-shell
-    if ! f_pip_app_is_installed "powerline-shell"; then
-        pip3 install powerline-shell
-    fi    
+    pip3 install powerline-shell
 
     # back-ups current bash profile
     cp ~/.bashrc ~/.bashrc-bak
@@ -20,6 +18,7 @@ source functions.sh
     echo 'PATH=$PATH:~/.local/bin' >> ~/.bash_profile
 
     echo '
+
 # setup-terminal.sh
 # makes powerline-shell default prompt for bash
 
@@ -49,6 +48,7 @@ fi' >> ~/.bashrc
     end' >> ~/.config/fish/config.fish
 
     fish -c "set -U fish_user_paths ~/.local/bin"
+    makedir ~/.config/fish/functions
 
     source setup-fonts.sh
 
