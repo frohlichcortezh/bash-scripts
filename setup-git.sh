@@ -51,13 +51,14 @@ source functions.sh
     git config --global user.name "$gitUserName"
 
     f_dialog_yes_no "Would you like to connect to your GitHub account with an SSH key ?"
+
     if [ $? -eq 0 ]; then
         
         source connect-github-ssh.sh $gitUserEmail
         
         f_dialog_yes_no  "If you cloned this repo using https, now that you have SSH enabled, would you like to change this repo authentication to ssh ?"
         if [ $? -eq 0 ]; then
-            git remote set-url origin git@github.com:frohlichcortezh/ubuntu-based-scripts.git            
+            git remote set-url origin git@github.com:frohlichcortezh/bash-scripts.git            
         fi
 
     fi
