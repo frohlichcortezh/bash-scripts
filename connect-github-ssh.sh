@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
 # https://help.github.com/en/github/authenticating-to-github/checking-for-existing-ssh-keys
 
-source functions.sh
+source ../bash-scripts/functions.sh
 
     email=$1
 
@@ -46,6 +46,8 @@ source functions.sh
     eval $(ssh-agent -s)
     
     ssh-add "$file_key"
+    # ToDo use f_install
+    sudo apt install xclip
     xclip -sel clip < "$file_key"
 
     f_printLn "If you're running this on a X server your SSH key should be in your clipboard."

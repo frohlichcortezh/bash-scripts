@@ -358,7 +358,7 @@ f_dialog_check_list(){
 
 f_app_install() {
     #ToDo run different package managers according to distro
-    sudo apt-get install "$@" -y
+    sudo apt install "$@" -y
 }
 
 f_app_is_installed() {
