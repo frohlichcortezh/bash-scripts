@@ -74,3 +74,5 @@ source ../bash-scripts/functions.sh
     f_printLn "You should then see a message with your username. "
 
     ssh -T git@github.com
+
+    # configure gh - https://cli.github.com/manual/gh_auth_login

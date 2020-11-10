@@ -28,6 +28,10 @@ f_app_install_from_snap() {
     sudo snap install "$@" -y
 }
 
+f_app_install_from_pip() {
+    sudo python3 -m pip install "$@"
+}
+
 f_app_is_installed() {
     package_info="$(dpkg -s $1)"
 
