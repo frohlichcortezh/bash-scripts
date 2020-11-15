@@ -352,50 +352,6 @@ f_dialog_check_list(){
 }
 
 #-----------------------------------------------------------------------------------
-# Package manager functions
-# ToDo run different package managers according to distro
-#-----------------------------------------------------------------------------------
-
-f_app_install() {
-    #ToDo run different package managers according to distro
-    sudo apt install "$@" -y
-}
-
-f_app_is_installed() {
-    package_info="$(dpkg -s $1)"
-
-    if [ -z "$package_info" ] || [ "$package_info" = *"not installed"* ]; then
-        false
-    else
-        true
-    fi
-}
-
-f_pip_app_is_installed() {
-	package_info="$(pip3 show $1)"
-	
-	if [ "$package_info" = *"not installed"* ]; then
-        false
-    else
-        true
-    fi
-}
-
-f_repository_is_installed() {
-    repository_list=`egrep -v '^#|^ *$' /etc/apt/sources.list /etc/apt/sources.list.d/*`
-
-    if [ "$package_info" = *"$1"* ]; then
-        false
-    else
-        true
-    fi
-}
-
-f_pkg_manager_update() {
-	sudo apt-get update
-}
-
-#-----------------------------------------------------------------------------------
 # File system functions
 #-----------------------------------------------------------------------------------
 
