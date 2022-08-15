@@ -1,6 +1,6 @@
-# bash-scripts
+# bash-scripts 
 
-Under development, use at your on risk.
+## #WIP Work in progress
 
 ## Collection of bash scripts to automate repetitive tasks
 
