@@ -48,6 +48,9 @@ sudo usermod -aG docker $USER
 newgrp docker 
 
 echo "docker version: $(docker -v && docker ps)"
+echo "docker compose version: $(docker compose version)"
+
+#TOdo check docker compose broken after portainer installation
 
 # Install portainer
 # REF: https://docs.portainer.io/v/ce-2.6/start/install/server/docker/linux
