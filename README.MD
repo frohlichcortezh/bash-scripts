@@ -1,13 +1,21 @@
-# bash-scripts 
+# bash-scripts (#WIP Work in progress)
 
-## #WIP Work in progress
+# Collection of bash scripts to automate repetitive tasks
 
-## Collection of bash scripts to automate repetitive tasks
+## Usage
 
-* `connect-github-ssh.sh`
-    will create ssh-keys if none are present and give instructions on how to added it your GitHub account
-    uses one argument, that should be your e-mail. if not passed as an argument, user will be prompted for input
+Clone this repo with HTTP
+```
+git clone https://github.com/frohlichcortezh/bash-scripts.git
+```
 
-* `functions.sh`
-    common functions used by the scripts
+## Connect to github with ssh
+  Adds a new ssh key and give instructions on how to add it to github.
+  ```
+  . ../bash-scripts/bin/connect-github-ssh.sh
+  ```
 
+  or 
+  ```
+  . ../bash-scripts/bin/connect-github-ssh.sh "your-email@domain.com"
+  ```
