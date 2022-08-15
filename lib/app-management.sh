@@ -25,11 +25,15 @@ f_app_install() {
 f_app_install_from_snap() {
     #ToDo check for classic argument
     #sudo snap install --classic code
-    sudo snap install "$@" -y
+    sudo snap install "$@"
 }
 
 f_app_install_from_pip() {
     sudo python3 -m pip install "$@"
+}
+
+f_app_install_from_npm() {
+    sudo npm install --location=global "$@"
 }
 
 f_app_is_installed() {
