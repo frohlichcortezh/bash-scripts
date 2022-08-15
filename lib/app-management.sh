@@ -63,8 +63,18 @@ f_repository_is_installed() {
 }
 
 f_pkg_manager_update() {
-    # check if update is needed
-	sudo apt update
+    # update
+	sudo apt update -y
+}
+
+f_pkg_manager_upgrade() {
+    # upgrade
+	sudo apt upgrade -y
+}
+
+f_pkg_manager_updateAndUpgrade() {
+    # update and upgrade
+	sudo apt update -y && sudo apt upgrade -y
 }
 
 f_repository_add() {
