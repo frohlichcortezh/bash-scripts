@@ -31,7 +31,7 @@ Installs fish, python3, python3-pip, powerline-shell and Cascadia Code font
 
 ## **Setup DEV**
 
-Installs node, npm, yarn, angular, docker, portainer
+Installs VS Code, node, npm, yarn, angular, docker, portainer
 
   ```
   . ../bash-scripts/bin/setup-dev.sh

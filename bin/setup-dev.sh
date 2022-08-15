@@ -49,3 +49,13 @@ echo "docker version: $(docker -v && docker ps)"
 # REF: https://docs.portainer.io/v/ce-2.6/start/install/server/docker/linux
 mkdir -p $HOME/dev/docker/volumes/portainer_data
 docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/dev/docker/volumes/portainer_data:/data portainer/portainer-ce:2.11.1
+
+yourIpAddress=$(hostname  -I | cut -f1 -d' ')
+echo Go to http://$yourIpAddress:9443
+echo Configure admin user and choose local
+
+# Install VS Code
+# REF: https://code.visualstudio.com/docs/setup/linux
+mkdir -p $HOME/Downloads/Apps/ 
+wget -O $HOME/Downloads/Apps/VSCode.deb https://go.microsoft.com/fwlink/?LinkID=760868
+f_app_install $HOME/Downloads/Apps/VSCode.deb
