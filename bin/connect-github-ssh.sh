@@ -23,7 +23,11 @@ source ../bash-scripts/lib/functions.sh
     #ToDo check if git user.name was set up
     # Prompt to set up user name and give it a default value from git user.name config
 
+    # https://docs.github.com/en/get-started/getting-started-with-git/setting-your-username-in-git
+    # ToDo set git username and email
+
     ssh_keygen() {
+        # ToDo give option for which algo to use
         ssh-keygen -t ed25519 -C "$email"
         #ssh-keygen -t rsa -b 4096 -C "$email"    
     }
@@ -90,5 +94,3 @@ source ../bash-scripts/lib/functions.sh
     f_printLn "You should then see a message with your username. "
 
     ssh -T git@github.com
-
-    # configure gh - https://cli.github.com/manual/gh_auth_login
