@@ -5,6 +5,7 @@ source ../bash-scripts/lib/app-management.sh
 f_pkg_manager_updateAndUpgrade
 f_app_install "fish" "python3" "python3-pip"
 
+## REF: https://github.com/b-ryan/powerline-shell
 f_app_install_from_pip "powerline-shell"
 
 # Update bash profile
