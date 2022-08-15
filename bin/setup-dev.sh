@@ -21,6 +21,10 @@ echo "yarn version: $(yarn -v)"
 
 f_app_install_from_npm @angular/cli
 
+# Install ionic
+## REF: 
+f_app_install_from_npm @ionic/cli
+
 # Install docker
 ## REF: https://docs.docker.com/engine/install/ubuntu/
 
@@ -59,3 +63,31 @@ echo Configure admin user and choose local
 mkdir -p $HOME/Downloads/Apps/ 
 wget -O $HOME/Downloads/Apps/VSCode.deb https://go.microsoft.com/fwlink/?LinkID=760868
 f_app_install $HOME/Downloads/Apps/VSCode.deb
+
+# Install VS COde extensions
+code --install-extension ahmadawais.shades-of-purple
+code --install-extension cyrilletuzi.angular-schematics
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension esbenp.prettier-vscode
+code --install-extension firefox-devtools.vscode-firefox-debug
+code --install-extension formulahendry.auto-close-tag
+code --install-extension GrapeCity.gc-excelviewer
+code --install-extension hediet.vscode-drawio
+code --install-extension Ionic.ionic
+code --install-extension johnpapa.Angular2
+code --install-extension mechatroner.rainbow-csv
+code --install-extension miguelsolorio.fluent-icons
+code --install-extension mikestead.dotenv
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-dotnettools.csharp
+code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-ssh
+code --install-extension ms-vscode-remote.remote-ssh-edit
+code --install-extension RapidAPI.vscode-rapidapi-client
+code --install-extension redhat.vscode-yaml
+code --install-extension ritwickdey.LiveServer
+code --install-extension VisualStudioExptTeam.intellicode-api-usage-examples
+code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension Zignd.html-css-class-completion
