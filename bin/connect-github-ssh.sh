@@ -13,9 +13,15 @@ source ../bash-scripts/lib/functions.sh
         while [ "$email" = "" ]; do read email; done
     }
 
+    #ToDo if email is not passed check if git email was already set up "git config --global user.email"
+    # if there's a value, use it. If there's not, set up at the end
+
     if [ "$email" = "" ]; then
         inputEmail
     fi
+
+    #ToDo check if git user.name was set up
+    # Prompt to set up user name and give it a default value from git user.name config
 
     ssh_keygen() {
         ssh-keygen -t ed25519 -C "$email"
