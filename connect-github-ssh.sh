@@ -18,12 +18,13 @@ source ../bash-scripts/functions.sh
     fi
 
     ssh_keygen() {
-        ssh-keygen -t rsa -b 4096 -C "$email"    
+        ssh-keygen -t ed25519 -C "$email"
+        #ssh-keygen -t rsa -b 4096 -C "$email"    
     }
 
     ssh_key_menu() {
         dialog_menu_array=('' '●─ Choose one of the existing keys ')
-        dialog_menu_array+=($(ls ~/.ssh/*.pub) '')
+        dialog_menu_array+=($(ls $HOME/.ssh/*.pub) '')
         dialog_menu_array+=('Add new' ': Create a new ssh key and use it.')
         f_dialog_menu        
         
@@ -34,18 +35,26 @@ source ../bash-scripts/functions.sh
         fi
     }
 
-    if [ -d "~/.ssh" ]; then
+    if [ -d "$HOME/.ssh" ]; then
         ssh_key_menu
     else
         ssh_keygen
     fi    
 
-    file_key=`f_readP "What's the file name of your key ? [Leave empty to default ~/.ssh/id_rsa.pub] :" "~/.ssh/id_rsa.pub"`
+    #file_key=`f_readP "What's the file name of your key ? [Leave empty to default $HOME/.ssh/id_rsa.pub] :" "$HOME/.ssh/id_rsa.pub"`
+    file_key=`f_readP "What's the file name of your key ? [Leave empty to default $HOME/.ssh/id_ed25519.pub] :" "$HOME/.ssh/id_ed25519.pub"`
+    
+    f_printLn "File key:"
+    f_printLn $file_key
 
+    chmod 400 $file_key
+    echo "${file_key/.pub/}"
+    chmod 400 "${file_key/.pub/}"
+    
     # start the ssh-agent in the background
     eval $(ssh-agent -s)
     
-    ssh-add "$file_key"
+    ssh-add $file_key
     # ToDo use f_install
     sudo apt install xclip
     xclip -sel clip < "$file_key"
@@ -66,7 +75,8 @@ source ../bash-scripts/functions.sh
 
     yes_no="N"
 
-    while [ "$yes_no" != "Y" ]; do read f_readYesNo "Did you add it ? (y/N)"; done
+    #while [ "$yes_no" != "Y" ]; do read f_readYesNo "Did you add it ? (y/N)"; done
+    f_readP "[Enter] once you added it"
 
     f_printLn "Ok then. If you've succesfully added your key will be testing it."
     f_printLn "Check https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection to see if the fingerprint showed below matches the official one."
