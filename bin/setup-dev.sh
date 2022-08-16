@@ -11,7 +11,9 @@ f_app_install "snapd"
 ## REF: https://nodejs.org/en/download/package-manager/#snap
 
 f_app_install_from_snap "node" --classic --channel=16
-f_app_install_from_npm npm@8.17.0
+f_app_install_from_npm npm@8.17.0 @angular-devkit/build-angular
+f_app_install_from_npm typescript --save-dev
+
 echo "node version: $(node -v)"
 echo "npm version: $(npm -v)"
 echo "yarn version: $(yarn -v)"
@@ -20,7 +22,7 @@ echo "yarn version: $(yarn -v)"
 ## REF: https://angular.io/guide/setup-local
 
 f_app_install_from_npm @angular/cli
-
+echo "angular version: $(ng version)"
 # Install ionic
 ## REF: 
 f_app_install_from_npm @ionic/cli
@@ -94,3 +96,11 @@ code --install-extension ritwickdey.LiveServer
 code --install-extension VisualStudioExptTeam.intellicode-api-usage-examples
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension Zignd.html-css-class-completion
+
+# Install .NET lts/stable (as of 16/08 it's 6.0)
+## REF: https://docs.microsoft.com/en-us/dotnet/core/install/linux-snap
+
+f_app_install_from_snap "dotnet-sdk" --classic --channel=lts/stable
+sudo snap alias dotnet-sdk.dotnet dotnet
+echo "dotnet version: $(dotnet --version)"
+echo "export DOTNET_ROOT=/snap/dotnet-sdk/current" >> $HOME/.bashrc 
