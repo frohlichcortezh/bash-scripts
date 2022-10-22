@@ -6,10 +6,12 @@ f_pkg_manager_updateAndUpgrade
 f_app_install "fish" "python3" "python3-pip"
 
 ## REF: https://github.com/b-ryan/powerline-shell
-f_app_install_from_pip "powerline-shell"
+## DEPRECATED (Use oh-my-posh instead)
+# f_app_install_from_pip "powerline-shell"
 
 # Update bash profile
-
+# ToDo update to use oh-my-posh instead
+# REF: https://ohmyposh.dev/docs/installation/customize
 tee -a $HOME/.bashrc << END
 
 function _update_ps1() {
@@ -41,3 +43,7 @@ unzip -d $HOME/Downloads/Fonts/CascadiaCode/ $HOME/Downloads/Fonts/CascadiaCode/
 mkdir -p ~/.local/share/fonts/
 cp $HOME/Downloads/Fonts/CascadiaCode/ttf/Cascadia*.ttf ~/.local/share/fonts/
 fc-cache -v
+
+sudo apt-get install build-essential procps curl file git
+
+brew install jandedobbeleer/oh-my-posh/oh-my-posh

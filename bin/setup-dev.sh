@@ -104,3 +104,6 @@ f_app_install_from_snap "dotnet-sdk" --classic --channel=lts/stable
 sudo snap alias dotnet-sdk.dotnet dotnet
 echo "dotnet version: $(dotnet --version)"
 echo "export DOTNET_ROOT=/snap/dotnet-sdk/current" >> $HOME/.bashrc 
+
+# Install GO
+curl -OL https://go.dev/dl/go1.19.linux-amd64.tar.gz
